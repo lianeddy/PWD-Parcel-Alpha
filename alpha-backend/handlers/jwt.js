@@ -1,9 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const createJWTToken = (payload) => {
-  return jwt.sign(payload, "bakaneko", {
-    expiresIn: "12h",
-  });
+  return jwt.sign(payload, "bakaneko");
 };
 const checkToken = (req, res, next) => {
   if (req.method !== "OPTIONS") {

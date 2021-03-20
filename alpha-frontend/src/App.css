@@ -104,7 +104,50 @@
 }
 
 .product-detail-container {
+  padding: 50px;
   display: flex;
   flex-direction: row;
-  align-content: space-around;
+  width: 100%;
+}
+
+.image-detail {
+  margin: 40px;
+  width: 50%;
+  height: 400px;
+  background-color: #282c34;
+}
+
+.product-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.product-detail {
+  width: 50%;
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.description-container {
+  text-align: justify;
+}
+
+.product-price {
+  text-align: left;
+  font-size: 18px;
+}
+
+.product-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.add-to-cart {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
 }
