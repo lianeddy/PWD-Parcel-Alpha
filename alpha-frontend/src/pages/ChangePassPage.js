@@ -16,13 +16,13 @@ class ChangePassPage extends Component {
     });
   };
 
-  onClickChangePass =() => {
-    const {changePassAction} = this.props
-    const {password} = this.state
-    const token = new URLSearchParams(this.props.location.search).get("token")
-    changePassAction({password, token})
-    alert("password has been changed")
-  }
+  onClickChangePass = () => {
+    const { changePassAction } = this.props;
+    const { password } = this.state;
+    const token = new URLSearchParams(this.props.location.search).get("token");
+    changePassAction({ password, token });
+    alert("password has been changed");
+  };
 
   render() {
     const { password, confirmPassword } = this.state;
@@ -30,13 +30,26 @@ class ChangePassPage extends Component {
       <div className={style.container}>
         <h2 style={{ fontSize: 40 }}>Change My Password</h2>
         <div>
-          <Input placeholder="password" id="password" onChange={this.onChangeInput}/>
-          <Input placeholder="confirm password" id="confirmPassword" onChange={this.onChangeInput}/>
+          <Input
+            placeholder="password"
+            id="password"
+            onChange={this.onChangeInput}
+          />
+          <Input
+            placeholder="confirm password"
+            id="confirmPassword"
+            onChange={this.onChangeInput}
+          />
         </div>
-        <Button onClick={
-          password === confirmPassword ? 
-          this.onClickChangePass : () => alert("Password should be same")
-        }>Confirm</Button>
+        <Button
+          onClick={
+            password === confirmPassword
+              ? this.onClickChangePass
+              : () => alert("Password should be same")
+          }
+        >
+          Confirm
+        </Button>
       </div>
     );
   }

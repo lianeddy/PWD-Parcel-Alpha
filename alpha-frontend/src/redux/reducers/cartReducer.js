@@ -16,7 +16,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        productCart: action.payload,
+        productCart: [...state.productCart, action.payload],
       };
     default:
       return state;
