@@ -33,7 +33,7 @@ class ChangePassPage extends Component {
           <Input placeholder="confirm password" onChange={this.onChangeInput}/>
         </div>
         <Button onClick={
-          password && confirmPassword ? 
+          password === confirmPassword ? 
           this.onClickChangePass : () => alert("Password should be same")
         }>Confirm</Button>
       </div>

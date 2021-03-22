@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import "../App.css";
 import { registerAction } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
 
+
   const handlerChange = (e) => {
     const { id, value } = e.target;
     setState({
@@ -20,10 +22,12 @@ const RegisterPage = () => {
     });
   };
 
+
   const handlerSubmit = () => {
     const { username, email, password } = state;
     if (state.password === state.confirmPassword) {
       dispatch(registerAction({ username, email, password }));
+      // dispatch(keepLoginAction())
     } else {
       alert("Password Invalid");
     }
@@ -77,9 +81,12 @@ const RegisterPage = () => {
             />
           </div>
           <div className="registerItem">
-            <button className="registerBtn" onClick={handlerSubmit}>
-              Register
-            </button>
+            {/* pakek href yaa */}
+            <Link to="/">
+              <button className="registerBtn" onClick={handlerSubmit}>
+                Register
+              </button>
+            </Link>
           </div>
         </div>
         <div className="registerFooter">

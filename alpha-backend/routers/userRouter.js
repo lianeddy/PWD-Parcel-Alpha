@@ -2,8 +2,8 @@ const router = require("express").Router();
 const query = require("../database");
 const { userController } = require("../controllers");
 // const { verifyToken,  createToken } = require("../helpers/jwtHelper");
-const hashPassword = require("../helpers/hash");
-const { verifyToken, checkToken } = require("../helpers/jwtHelper");
+// const hashPassword = require("../helpers/hash");
+// const { verifyToken, checkToken } = require("../helpers/jwtHelper");
 const { route } = require("./productRouter");
 const {
   transporter,
@@ -31,14 +31,14 @@ router.get("/all", (req, res) => {
 // req.paramnya nanti diubah sama req.user.id
 // karena masih belum ada token
 // params :id nanti dihapus saja
-router.post("/change-pass/:id", (req, res) => {
+router.post("/change-pass",checkToken ,(req, res) => {
   const { password } = req.body;
 
-  // const userID = req.user.id;
+  const userID = req.user.id;
   // console.log(userID);
   const editPassword = `UPDATE users SET password = '${hashPassword(
     password
-  )}' WHERE id = ${req.params.id}`;
+  )}' WHERE id = ${userID}`;
   // const editPassword = `UPDATE users set password =${password} where id = ${userID}`;
   query(editPassword, (err) => {
     if (err) return res.status(500).send(err.message);
@@ -48,7 +48,54 @@ router.post("/change-pass/:id", (req, res) => {
 
 // router.post('/keepLogin', verifyToken, userController.keepLogin)
 // router.post('/login', userController.login)
+router.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  let sql = `
+    SELECT 
+        id, 
+        username, 
+        email, 
+        roleID, 
+        verified 
+    FROM users WHERE username = '${username}' AND password = '${hashPassword(
+    password
+  )}'`;
+  query(sql, (err, data) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    if (data.length === 0) {
+      return res.status(404).send({
+        message: "User Not Found",
+        status: "Not Found",
+      });
+    } else {
+      const responseData = { ...data[0] };
+      const token = createJWTToken(responseData);
+      responseData.token = token;
+      return res.status(200).send(responseData);
+    }
+  });
+});
 
+
+router.post("/keep-login", checkToken, (req, res) => {
+  let sql = `
+    SELECT 
+        id, 
+        username, 
+        email, 
+        alamat, 
+        roleID, 
+        verified 
+    FROM users WHERE id = ${req.user.id}`;
+  query(sql, (err, data) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.status(200).send(data[0]);
+  });
+});
 
 
 // router.post("/keepLogin", verifyToken, userController.keepLogin);
