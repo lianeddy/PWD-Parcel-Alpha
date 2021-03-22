@@ -7,7 +7,7 @@ import { changePassAction } from "../redux/actions";
 class ChangePassPage extends Component {
   state = {
     password: "",
-    confiirmPassword: "",
+    confirmPassword: "",
   };
 
   onChangeInput = (e) => {
@@ -21,6 +21,7 @@ class ChangePassPage extends Component {
     const {password} = this.state
     const token = new URLSearchParams(this.props.location.search).get("token")
     changePassAction({password, token})
+    alert("password has been changed")
   }
 
   render() {
@@ -29,8 +30,8 @@ class ChangePassPage extends Component {
       <div className={style.container}>
         <h2 style={{ fontSize: 40 }}>Change My Password</h2>
         <div>
-          <Input placeholder="password" onChange={this.onChangeInput}/>
-          <Input placeholder="confirm password" onChange={this.onChangeInput}/>
+          <Input placeholder="password" id="password" onChange={this.onChangeInput}/>
+          <Input placeholder="confirm password" id="confirmPassword" onChange={this.onChangeInput}/>
         </div>
         <Button onClick={
           password === confirmPassword ? 

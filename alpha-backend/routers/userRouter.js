@@ -84,8 +84,7 @@ router.post("/keep-login", checkToken, (req, res) => {
     SELECT 
         id, 
         username, 
-        email, 
-        alamat, 
+        email,  
         roleID, 
         verified 
     FROM users WHERE id = ${req.user.id}`;

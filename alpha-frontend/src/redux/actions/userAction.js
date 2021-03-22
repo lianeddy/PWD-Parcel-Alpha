@@ -49,13 +49,10 @@ export const keepLoginAction = () => {
         },
       };
       const response = await Axios.post(`${url}/keep-login`, {}, headers);
-      const { id, username, email, alamat, roleID, verified } = response.data;
+      const { id, username, email, roleID, verified } = response.data;
       dispatch({
         type: LOGIN,
-        payload: { id, username, email, alamat, roleID, verified },
-      });
-      dispatch({
-        type: API_USER_SUCCESS,
+        payload: { id, username, email, roleID, verified },
       });
     } catch (err) {
       dispatch({
@@ -70,21 +67,11 @@ export const loginAction = (data) => {
     dispatch({ type: API_USER_START });
     try {
       const response = await Axios.post(`${url}/login`, data);
-      const {
-        id,
-        username,
-        email,
-        roleID,
-        verified,
-        token,
-      } = response.data;
+      const { id, username, email, roleID, verified, token } = response.data;
       localStorage.setItem("token", token);
       dispatch({
         type: LOGIN,
-        payload: { id, username, email,  roleID, verified },
-      });
-      dispatch({
-        type: API_USER_SUCCESS,
+        payload: { id, username, email, roleID, verified },
       });
     } catch (err) {
       dispatch({
