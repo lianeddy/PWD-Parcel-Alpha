@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: #faeee7;
+  justify-content: space-around;
+  color: #594a4e;
+  font-family: serif;
+  padding-top: 10px;
+}
+.title {
+  font-size: 70px;
+  /* margin-left: px; */
+  /* margin-right: 350px; */
+  align-items: center;
+  text-align: center;
+  /* justify-content: center; */
+  /* font-weight: 300; */
+}

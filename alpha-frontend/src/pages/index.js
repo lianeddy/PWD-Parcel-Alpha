@@ -1,7 +1,5 @@
-import HomePage from './HomePage'
-import ProfilPage from './ProfilPage'
+import HomePage from "./HomePage";
+import AccountPage from "./AccountPage"
+import ChangePassPage from "./ChangePassPage"
 
-export {
-    HomePage,
-    ProfilPage
-}
+export { HomePage, AccountPage,ChangePassPage };
