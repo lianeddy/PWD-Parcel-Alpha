@@ -1,4 +1,8 @@
-import { ADD_TO_CART, ADD_TO_CART_SUCCESS } from "../types";
+import {
+  ADD_TO_CART,
+  ADD_TO_CART_SUCCESS,
+  EDIT_TO_CART_SUCCESS,
+} from "../types";
 
 const INITIAL_STATE = {
   parcelCart: [],
@@ -16,8 +20,14 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        productCart: action.payload,
+        productCart: [action.payload],
       };
+    case EDIT_TO_CART_SUCCESS:
+      return {
+        ...state,
+        productCart: [action.payload],
+      };
+
     default:
       return state;
   }

@@ -8,10 +8,13 @@ export const PRODUCT_BY_ID_SUCCESS = "PRODUCT_BY_ID_SUCCESS";
 export const API_USER_START = "API_USER_START";
 export const API_USER_FAILED = "API_USER_FAILED";
 export const API_USER_SUCCESS = "API_USER_SUCCESS";
+export const API_CHECK_USER = "API_CHECK_USER";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
+export const ADD_TO_CART_FAILED = "ADD_TO_CART_FAILED";
+export const EDIT_TO_CART_SUCCESS = "EDIT_TO_CART_SUCCESS";
 
 export const NULLIFY_ERROR = "NULLIFY_ERROR";

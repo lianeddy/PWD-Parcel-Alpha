@@ -33,6 +33,22 @@
   }
 }
 
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: #ee9595;
+  font-size: 12px;
+  border: none;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ee9595;
+  background-color: cutom-color;
+  border-color: #2e4c80;
+  border-color: cutom-cor;
+}
 .App {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -45,6 +61,7 @@
   align-content: center;
   justify-content: center;
   padding: 20px;
+  background-color: #fffffe;
 }
 
 .registerContainer {
@@ -54,12 +71,14 @@
   flex-direction: column;
   justify-content: space-between;
   border-style: none;
-  border-radius: 15px;
+  border-radius: 5px;
   border-width: thin;
-  background-color: #e5defc;
-  color: #391f6d;
-  width: 30%;
-  height: 450px;
+  color: #5f3f3f;
+  width: 50%;
+}
+
+.registerHeader {
+  align-self: center;
 }
 
 .registerForm {
@@ -75,13 +94,23 @@
   margin: 10px;
 }
 
+.registerItem > label {
+  font-size: medium;
+  color: #594a4e;
+}
+
 .registerInput {
   padding: 5px;
   outline: none;
   border-style: none;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
   margin-top: 5px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #e6dbd5;
+  background-color: white;
+  height: 30px;
 }
 
 /* .registerInput:focus {
@@ -89,18 +118,23 @@
 } */
 
 .registerBtn {
-  background-color: #592fad;
+  background-color: #ff8ba7;
   outline: none;
   border-style: none;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100px;
   align-self: center;
-  color: white;
+  color: #33272a;
+  font-size: medium;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .registerBtn:hover {
   cursor: pointer;
+  background-color: #33272a;
+  color: #ff8ba7;
 }
 
 .product-detail-container {
@@ -112,9 +146,12 @@
 
 .image-detail {
   margin: 40px;
+  padding: 40px;
   width: 50%;
   height: 400px;
-  background-color: #282c34;
+  border-style: solid;
+  border-width: thin;
+  background-color: rgb(238, 211, 211);
 }
 
 .product-title {
@@ -136,6 +173,8 @@
 
 .product-price {
   text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 18px;
 }
 
@@ -145,9 +184,30 @@
   justify-content: center;
 }
 
+.product-action > div {
+  padding: 20px;
+}
 .add-to-cart {
+  padding: 20px;
   display: flex;
   flex-direction: row;
   align-self: center;
   justify-content: center;
+}
+
+.add-to-cart > button {
+  background-color: #ff8ba7;
+  border-style: none;
+  padding: 10px;
+  text-justify: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: medium;
+  border-radius: 3px;
+  color: #33272a;
+}
+
+.add-to-cart > h6 {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

@@ -8,7 +8,8 @@ const port = process.env.PORT || 2000;
 const { userRouter, productRouter } = require("./routers");
 
 app.use(cors());
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.status(200).send("<h2>API for Parcel Alpha</h2>");

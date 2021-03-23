@@ -2,10 +2,12 @@ import {
   API_PRODUCT_FAILED,
   API_PRODUCT_START,
   API_PRODUCT_SUCCESS,
+  PRODUCT_BY_ID_SUCCESS,
 } from "../types";
 
 const INITIAL_STATE = {
   productList: [],
+  productById: {},
   loading: false,
   error: false,
   errorMessage: "",
@@ -22,6 +24,12 @@ export const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         productList: action.payload,
+        loading: false,
+      };
+    case PRODUCT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        productById: action.payload,
         loading: false,
       };
     case API_PRODUCT_FAILED:

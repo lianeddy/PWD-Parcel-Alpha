@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
-import { registerAction } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { registerAction, getUser } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const RegisterPage = () => {
     password: "",
     confirmPassword: "",
   });
+  const { error, errorMessage, loading } = useSelector((state) => state.user);
 
   const handlerChange = (e) => {
     const { id, value } = e.target;
@@ -21,20 +23,29 @@ const RegisterPage = () => {
   };
 
   const handlerSubmit = () => {
-    const { username, email, password } = state;
-    if (state.password === state.confirmPassword) {
+    const { username, email, password, confirmPassword } = state;
+    if (!username || !email || !password || !confirmPassword) {
+      swal("Please fill all the forms.");
+    } else if (password !== confirmPassword) {
+      swal("Please reconfirm your password");
+    } else if (password.length < 6) {
+      swal(
+        "Password has to be at least 6 characters, contains number and special character."
+      );
+    } else if (state.password === state.confirmPassword) {
       dispatch(registerAction({ username, email, password }));
-    } else {
-      alert("Password Invalid");
+      if (error) {
+        console.log("error");
+        swal(`${errorMessage}`);
+      } else {
+        swal("Email verification sent. Please verify your account.");
+      }
     }
   };
 
   return (
     <div className="registerSection">
       <div className="registerContainer">
-        <div className="registerHeader">
-          <p>WANDERLUST</p>
-        </div>
         <div className="registerForm">
           <div className="registerItem">
             <label>Username</label>
@@ -83,7 +94,7 @@ const RegisterPage = () => {
           </div>
         </div>
         <div className="registerFooter">
-          <p>Masuk ke Big Box</p>
+          <p>Masuk ke Wanderlust</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import { HomePage, ProductDetail, ProfilPage, RegisterPage } from "./pages";
+import {
+  HomePage,
+  ProductDetail,
+  ProfilPage,
+  RegisterPage,
+  VerificationPage,
+} from "./pages";
 
 class App extends Component {
   state = {};
@@ -11,6 +17,7 @@ class App extends Component {
         <Route path="/profil" component={ProfilPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/product/:id" component={ProductDetail} />
+        <Route path="/verify" component={VerificationPage} />
       </div>
     );
   }
