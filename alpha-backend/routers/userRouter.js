@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const query = require("../database");
-const { userController } = require("../controllers");
-// const { verifyToken,  createToken } = require("../helpers/jwtHelper");
-// const hashPassword = require("../helpers/hash");
-// const { verifyToken, checkToken } = require("../helpers/jwtHelper");
+
 const { route } = require("./productRouter");
 const {
   transporter,

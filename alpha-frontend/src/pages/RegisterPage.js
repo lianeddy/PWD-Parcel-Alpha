@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "../App.css";
-import { registerAction, getUser } from "../redux/actions";
+import { registerAction } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const RegisterPage = () => {
     password: "",
     confirmPassword: "",
   });
-  const { error, errorMessage, loading } = useSelector((state) => state.user);
+  const { error, errorMessage } = useSelector((state) => state.user);
 
   const handlerChange = (e) => {
     const { id, value } = e.target;
