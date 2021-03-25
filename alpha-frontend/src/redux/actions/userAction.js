@@ -5,7 +5,7 @@ import {
   API_USER_FAILED,
   API_USER_SUCCESS,
   LOGOUT,
-  API_CHECK_USER,
+  // API_CHECK_USER,
   LOGIN,
 } from "../types";
 

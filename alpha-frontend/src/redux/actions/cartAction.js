@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import { ADD_TO_CART_SUCCESS, EDIT_TO_CART_SUCCESS } from "../types";
 
 export const addToCartAction = (data) => {

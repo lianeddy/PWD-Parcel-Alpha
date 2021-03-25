@@ -9,8 +9,11 @@ const bearerToken = require("express-bearer-token");
 
 const { userRouter, productRouter } = require("./routers");
 
+//! PENTINGGG!!!!!!
 app.use(cors());
+app.use(bearerToken());
 app.use(bodyParser.json());
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {

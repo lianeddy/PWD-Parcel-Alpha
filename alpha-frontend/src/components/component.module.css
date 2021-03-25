@@ -3,7 +3,7 @@
   flex-direction: row;
   background-color: #faeee7;
   justify-content: space-around;
-  color: #594a4e;
+  color: #33272a;
   font-family: serif;
   padding-top: 10px;
 }
@@ -16,3 +16,12 @@
   /* justify-content: center; */
   /* font-weight: 300; */
 }
+
+.imgcard {
+  float: left;
+  width:  200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+

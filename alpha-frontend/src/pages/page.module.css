@@ -1,18 +1,55 @@
 .container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .Appcontainer {
-    margin-top: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  margin-bottom: 30px 30px;
+  text-align: left;
+  color: #594a4e;
+}
+
+/* Hero */
+.jumbotronImg {
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  /* padding: 50; */
+  margin-left: 50;
+}
+.headJumbotron {
+  margin-top: 50px;
+  font-size: 70px;
+  align-items: baseline;
+  font-family: serif;
+}
+.headlineJumbotron {
+  color: #33272a;
+}
+/* Hero */
+
+
+/* Features and Products */
+.featureProduct{
+    background-color: #faeee7;
+    padding: 150px ;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    padding: 30px;
-    margin-bottom: 30px 30px;
-    text-align: left;
+    order: 5;
+    align-items: center;
     color: #594a4e;
+}
+.Input{
+    margin: 8px;
+    padding: 9px;
+    display: flex;
+    width: 400px;
 }
