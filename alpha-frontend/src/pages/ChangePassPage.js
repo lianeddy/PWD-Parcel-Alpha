@@ -43,13 +43,14 @@ class ChangePassPage extends Component {
           />
         </div>
         <Button
+          style={{ backgroundColor: "#ff8ba7", border: "none" }}
           onClick={
             password === confirmPassword
               ? this.onClickChangePass
               : () => alert("Password should be same")
           }
         >
-          Confirm
+          Confirm !
         </Button>
       </div>
     );

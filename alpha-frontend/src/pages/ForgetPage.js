@@ -13,7 +13,7 @@ class ForgetPage extends Component {
     return (
       <div className={style.container}>
         <div >
-          <h3>Please input your email first</h3>
+          <h3>Please input your email</h3>
         </div>
         <div >
           <Input
@@ -25,7 +25,7 @@ class ForgetPage extends Component {
         </div>
         <div className="my-2">
           <Button
-            color="dark"
+            style={{ backgroundColor:"#ff8ba7", border: "none"}}
             onClick={() => sendEmailChangeAction({ email: this.state.email })}
             disabled={loading}
           >

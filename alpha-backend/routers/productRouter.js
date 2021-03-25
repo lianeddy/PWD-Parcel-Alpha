@@ -20,16 +20,16 @@ router.get("/", (req, res) => {
 });
 
 // Get per id
-// router.get("/:imagepath", (req, res) => {
-//   console.log(req.params.imagepath);
-//   const imagepath = parseInt(req.params);
-//   query(`SELECT * FROM products WHERE imagepath = "/products/${imagepath}"`, (err, data) => {
-//     if (err) {
-//       return res.status(500).send(err.message);
-//     }
-//     return res.status(200).send(data)
-//   });
-// });
+router.get("/:id", (req, res) => {
+  // console.log(req.params.imagepath);
+  // const imagepath = parseInt(req.params);
+  query(`SELECT * FROM products WHERE id = ${req.params}`, (err, data) => {
+    if (err) {
+      return res.status(500).send(err.message);
+    }
+    return res.status(200).send(data)
+  });
+});
 
 // Uploud gambar product per Id,
 // tambahkan column imagepath di products varcahr(>45)

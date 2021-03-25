@@ -9,7 +9,6 @@ const {
   hashPassword,
   checkToken,
 } = require("../handlers");
-// hash password ada dua
 const { registerValidator } = require("../middleware");
 
 //Get ALL
@@ -30,7 +29,7 @@ router.post("/change-email", (req, res) => {
   query(getEmail, (err, getEmailResult) => {
     if (err) return res.status(500).send(err.message);
     const userID = getEmailResult[0].id;
-    // console.log(getEmailResult[0]);
+    console.log(getEmailResult[0]);
     const token = createJWTToken({ id: userID });
 
     const mailOptions = {
@@ -140,52 +139,52 @@ router.post("/register", registerValidator, async (req, res) => {
 
 // router.post('/keepLogin', verifyToken, userController.keepLogin)
 // router.post('/login', userController.login)
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  let sql = `
-    SELECT 
-        id, 
-        username, 
-        email, 
-        roleID, 
-        verified 
-    FROM users WHERE username = '${username}' AND password = '${hashPassword(
-    password
-  )}'`;
-  query(sql, (err, data) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    if (data.length === 0) {
-      return res.status(404).send({
-        message: "User Not Found",
-        status: "Not Found",
-      });
-    } else {
-      const responseData = { ...data[0] };
-      const token = createJWTToken(responseData);
-      responseData.token = token;
-      return res.status(200).send(responseData);
-    }
-  });
-});
+// router.post("/login", (req, res) => {
+//   const { username, password } = req.body;
+//   let sql = `
+//     SELECT
+//         id,
+//         username,
+//         email,
+//         roleID,
+//         verified
+//     FROM users WHERE username = '${username}' AND password = '${hashPassword(
+//     password
+//   )}'`;
+//   query(sql, (err, data) => {
+//     if (err) {
+//       return res.status(500).send(err);
+//     }
+//     if (data.length === 0) {
+//       return res.status(404).send({
+//         message: "User Not Found",
+//         status: "Not Found",
+//       });
+//     } else {
+//       const responseData = { ...data[0] };
+//       const token = createJWTToken(responseData);
+//       responseData.token = token;
+//       return res.status(200).send(responseData);
+//     }
+//   });
+// });
 
-router.post("/keep-login", checkToken, (req, res) => {
-  let sql = `
-    SELECT 
-        id, 
-        username, 
-        email,  
-        roleID, 
-        verified 
-    FROM users WHERE id = ${req.user.id}`;
-  query(sql, (err, data) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.status(200).send(data[0]);
-  });
-});
+// router.post("/keep-login", checkToken, (req, res) => {
+//   let sql = `
+//     SELECT
+//         id,
+//         username,
+//         email,
+//         roleID,
+//         verified
+//     FROM users WHERE id = ${req.user.id}`;
+//   query(sql, (err, data) => {
+//     if (err) {
+//       return res.status(500).send(err);
+//     }
+//     return res.status(200).send(data[0]);
+//   });
+// });
 
 // router.post("/keepLogin", verifyToken, userController.keepLogin);
 // router.post("/login", userController.login);
@@ -199,31 +198,6 @@ router.get("/", async (req, res) => {
     res.status(200).send(isRegistered[0]);
   } catch (err) {
     res.status(400).send({ error: err.message });
-  }
-});
-
-router.post("/register", registerValidator, async (req, res) => {
-  let { username, email, password } = req.body;
-  password = hashPassword(password);
-  try {
-    const registerUser = await query(
-      `INSERT INTO users (username, email, password, roleID, verified) VALUES ('${username}', '${email}', '${password}', 2, 2)`
-    );
-    const sendMail = {
-      from: "Admin <sinthadf@gmail.com>",
-      to: email,
-      subject: "Welcome greeting",
-      html: `<h3>Welcome to Wanderlust, ${username}!</h3><br><h4>Please click link below to verify your account.</h4><br><a href="http://localhost:3000/verify?username=${username}&password=${password}">Verify Account</a>`,
-    };
-    await transportPromise(sendMail);
-    const registeredUser = await query(
-      `SELECT id, username, email, roleID, verified FROM users WHERE id = ${registerUser.insertId}`
-    );
-    const responseData = { ...registeredUser[0] };
-    responseData.token = createJWTToken(responseData);
-    return res.status(200).send(responseData);
-  } catch (err) {
-    res.status(500).send({ error: err.message.responseData.error });
   }
 });
 
@@ -248,5 +222,29 @@ router.post("/email-verification", (req, res) => {
     });
   });
 });
+// router.post("/register", registerValidator, async (req, res) => {
+//   let { username, email, password } = req.body;
+//   password = hashPassword(password);
+//   try {
+//     const registerUser = await query(
+//       `INSERT INTO users (username, email, password, roleID, verified) VALUES ('${username}', '${email}', '${password}', 2, 2)`
+//     );
+//     const sendMail = {
+//       from: "Admin <sinthadf@gmail.com>",
+//       to: email,
+//       subject: "Welcome greeting",
+//       html: `<h3>Welcome to Wanderlust, ${username}!</h3><br><h4>Please click link below to verify your account.</h4><br><a href="http://localhost:3000/verify?username=${username}&password=${password}">Verify Account</a>`,
+//     };
+//     await transportPromise(sendMail);
+//     const registeredUser = await query(
+//       `SELECT id, username, email, roleID, verified FROM users WHERE id = ${registerUser.insertId}`
+//     );
+//     const responseData = { ...registeredUser[0] };
+//     responseData.token = createJWTToken(responseData);
+//     return res.status(200).send(responseData);
+//   } catch (err) {
+//     res.status(500).send({ error: err.message.responseData.error });
+//   }
+// });
 
 module.exports = router;
