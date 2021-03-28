@@ -14,7 +14,7 @@ class ProductDetail extends Component {
   componentDidMount() {
     const { productById } = this.props;
     const id = this.props.match.params.id;
-    console.log(id);
+    console.log(`Mounted: ${id}`);
     productById(id);
   }
 
