@@ -8,11 +8,15 @@ import {
   ChangePassPage,
   ProductDetail,
   RegisterPage,
-  LoginPage
-  ProfilPage,
+  LoginPage,
   VerificationPage,
+  CartPage,
 } from "./pages";
-import { keepLoginAction } from "./redux/actions";
+import {
+  keepLoginAction,
+  getParcelCart,
+  getProductCart,
+} from "./redux/actions";
 
 // link color
 // https://www.happyhues.co/palettes/15
@@ -20,9 +24,18 @@ import { keepLoginAction } from "./redux/actions";
 class App extends Component {
   state = {};
   componentDidMount() {
-    const { keepLoginAction } = this.props;
+    const {
+      keepLoginAction,
+      getParcelCart,
+      getProductCart,
+      user_id,
+    } = this.props;
     const token = localStorage.getItem("token");
-    if (token) {keepLoginAction()};
+    if (token) {
+      keepLoginAction();
+      getParcelCart(user_id);
+      getProductCart(user_id);
+    }
   }
   render() {
     return (
@@ -35,9 +48,22 @@ class App extends Component {
         <Route path="/register" component={RegisterPage} />
         <Route path="/product/:id" component={ProductDetail} />
         <Route path="/verify" component={VerificationPage} />
+        <Route path="/cart" component={CartPage} />
       </div>
     );
   }
 }
 
-export default connect(null, {keepLoginAction}) (App);
+const mapStatetoProps = ({ user, cart }) => {
+  return {
+    user_id: user.id,
+    parcelCart: cart.parcelCart,
+    productCart: cart.productCart,
+  };
+};
+
+export default connect(mapStatetoProps, {
+  keepLoginAction,
+  getParcelCart,
+  getProductCart,
+})(App);

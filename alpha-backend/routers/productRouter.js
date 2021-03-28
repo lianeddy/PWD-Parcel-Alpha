@@ -12,7 +12,7 @@ router.get("/:id", (req, res) => {
   const product_id = parseInt(req.params.id);
   query(`SELECT * FROM products WHERE id = ${product_id}`, (err, data) => {
     if (err) res.status(400).send({ error: err.message });
-    res.status(200).send(data[0]);
+    res.status(200).send(data);
   });
 });
 

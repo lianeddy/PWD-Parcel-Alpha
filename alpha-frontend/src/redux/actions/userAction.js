@@ -5,7 +5,6 @@ import {
   API_USER_FAILED,
   API_USER_SUCCESS,
   LOGOUT,
-  API_CHECK_USER,
   LOGIN,
 } from "../types";
 
@@ -45,6 +44,7 @@ export const registerAction = (registerData) => {
 export const logoutAction = () => {
   return (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("state");
     dispatch({
       type: LOGOUT,
     });
