@@ -46,6 +46,7 @@ export const registerAction = (registerData) => {
 export const logoutAction = () => {
   return (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("state");
     dispatch({
       type: LOGOUT,
     });
@@ -109,8 +110,8 @@ export const sendEmailChangeAction = (data) => {
       });
     } catch (err) {
       Swal.fire({
-        title: "Email not registered"
-      })
+        title: "Email not registered",
+      });
       dispatch({
         type: API_USER_FAILED,
         payload: err.message,

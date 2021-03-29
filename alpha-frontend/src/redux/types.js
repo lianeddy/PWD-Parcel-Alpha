@@ -17,6 +17,10 @@ export const API_CHECK_USER = "API_CHECK_USER";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const CART_START = "CART_START";
+export const PARCEL_CART_SUCCESS = "PARCEL_CART_SUCCESS";
+export const PRODUCT_CART_SUCCESS = "PRODUCT_CART_SUCCESS";
+export const CART_FAILED = "CART_FAILED";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
 export const ADD_TO_CART_FAILED = "ADD_TO_CART_FAILED";

@@ -30,7 +30,7 @@ class Header extends Component {
       textDecoration: "none",
     };
 
-    const { username, logoutAction } = this.props;
+    const { username, logoutAction, id } = this.props;
 
     return (
       <div className={style.container}>
@@ -72,7 +72,7 @@ class Header extends Component {
               <h1 className={style.title}>Wanderlust</h1>
             </a>
         </div>
-        <Link to="/cart" style={styleLink}>
+        <Link to={id ? `/cart/${id}` : "/login"} style={styleLink}>
           <div>
             <AiFillShopping size={40} />
           </div>
@@ -83,9 +83,10 @@ class Header extends Component {
   }
 }
 
-const mapStatetoProps = ({ user: { username } }) => {
+const mapStatetoProps = ({ user: { username, id } }) => {
   return {
     username,
+    id,
   };
 };
 

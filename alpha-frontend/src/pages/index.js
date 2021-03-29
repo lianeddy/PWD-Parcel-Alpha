@@ -10,6 +10,7 @@ import ForgetPage from "./ForgetPage";
 import ParcelPage from "./ParcelPage";
 import ParcelOptions from "./ParcelOptions";
 import AdminProduct from "./AdminProduct";
+import CartPage from "./CartPage";
 
 export {
   HomePage,
@@ -23,4 +24,5 @@ export {
   ParcelPage,
   ParcelOptions,
   AdminProduct,
+  CartPage,
 };

@@ -40,3 +40,38 @@
   justify-content: center;
   flex-direction: row;
 }
+.mainContainer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.cartWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+  padding: 20px;
+  box-shadow: 3px 1px 3px 1px #e7e7e7;
+  border-radius: 7px;
+}
+
+.image {
+  width: 75px;
+  height: 75px;
+  background-color: rgb(253, 248, 237);
+  margin-right: 30px;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 40px;
+}
+
+.description {
+  display: flex;
+  flex-direction: row;
+}

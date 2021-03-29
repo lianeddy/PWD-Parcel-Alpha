@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.use(bearerToken());
+
 app.get("/", (req, res) => {
   res.status(200).send("<h2>API for Parcel Alpha</h2>");
 });

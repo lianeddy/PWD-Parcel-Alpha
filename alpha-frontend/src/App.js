@@ -13,16 +13,30 @@ import {
   RegisterPage,
   ProductDetail,
   AdminProduct,
+  LoginPage,
+  VerificationPage,
+  CartPage,
 } from "./pages";
-import { keepLoginAction } from "./redux/actions";
+import {
+  keepLoginAction,
+  getParcelCart,
+  getProductCart,
+} from "./redux/actions";
 
 class App extends Component {
   state = {};
   componentDidMount() {
-    const { keepLoginAction } = this.props;
+    const {
+      keepLoginAction,
+      getParcelCart,
+      getProductCart,
+      user_id,
+    } = this.props;
     const token = localStorage.getItem("token");
     if (token) {
       keepLoginAction();
+      getParcelCart(user_id);
+      getProductCart(user_id);
     }
   }
   render() {
@@ -39,9 +53,23 @@ class App extends Component {
         <Route path="/parcels" component={ParcelPage} />
         <Route path="/parcel-options" component={ParcelOptions} />
         <Route path="/admin-product" component={AdminProduct} />
+        <Route path="/verify" component={VerificationPage} />
+        <Route path="/cart" component={CartPage} />
       </div>
     );
   }
 }
 
-export default connect(null, { keepLoginAction })(App);
+const mapStatetoProps = ({ user, cart }) => {
+  return {
+    user_id: user.id,
+    parcelCart: cart.parcelCart,
+    productCart: cart.productCart,
+  };
+};
+
+export default connect(mapStatetoProps, {
+  keepLoginAction,
+  getParcelCart,
+  getProductCart,
+})(App);

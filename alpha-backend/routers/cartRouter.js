@@ -53,13 +53,64 @@ router.post("/:user_id", async (req, res) => {
   }
 });
 
-router.get("/:user_id", (req, res) => {
-  query(selectCartQuery(parseInt(req.params.user_id)), (err, data) => {
-    if (err) return res.status(500).send({ error: err.message });
-    if (data.length === 0) return res.status(200).json({});
-    console.log(data[0].content);
-    res.status(200).json(JSON.parse(data[0].content));
-  });
+// router.get("/:user_id", (req, res) => {
+//   query(selectCartQuery(parseInt(req.params.user_id)), (err, data) => {
+//     if (err) return res.status(500).send({ error: err.message });
+//     if (data.length === 0) return res.status(200).send(null);
+//     // console.log(JSON.parse(data[0].content));
+//     console.log(`///nyampe sini sih///`);
+//     res.status(200).send(JSON.parse(data[0].content));
+//   });
+// });
+
+router.get("/parcels/:user_id", async (req, res) => {
+  try {
+    const parcelCart = await query(
+      `SELECT 
+      parc.cart_id, parc.parcelID, parc.parcel_qty,pp.parcelName, pp.parcelPrice, pp.imagepath
+      FROM user_cart uc
+      JOIN parcel_cart parc ON parc.cart_id = uc.user_cart_id
+      JOIN parcel_price pp ON pp.parcel_id = parc.parcelID
+      WHERE uc.user_id = ${req.params.user_id}
+    ;`
+    );
+    // parcelCart = JSON.parse(parcelCart[0].content);
+    // console.log(parcelCart);
+    res.status(200).send(parcelCart);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+router.get("/products/:user_id", async (req, res) => {
+  try {
+    const productCart = await query(`SELECT 
+    proc.cart_id, proc.productID, proc.product_qty, p.productName, p.price, p.imagepath
+    FROM user_cart uc
+    JOIN product_cart proc ON proc.cart_id = uc.user_cart_id
+    JOIN products p ON p.id_product = proc.productID
+        WHERE uc.user_id = ${req.params.user_id};`);
+    // console.log(productCart);
+    res.status(200).send(productCart);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+router.patch("/parcels/:user_id", async (req, res) => {
+  try {
+    const updateParcelCart = await query(`
+    UPDATE parcel_cart parc
+    JOIN user_cart uc ON parc.cart_id = uc.user_cart_id
+    JOIN parcel_price pp ON pp.parcel_id = parc.parcelID
+    SET parc.parcel_qty = ${req.body.quantity}
+    WHERE uc.user_id = ${req.params.user_id}
+    AND parc.parcelID = ${req.params.parcelID};`);
+    console.log(updateParcelCart);
+    res.status(200).send(updateParcelCart);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
 });
 
 module.exports = router;
