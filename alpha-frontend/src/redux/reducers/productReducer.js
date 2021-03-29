@@ -4,11 +4,8 @@ import {
   API_PRODUCT_START,
   API_PRODUCT_SUCCESS,
   FILTER_BY_PRICE,
-  LOAD_DATA,
   NULLIFY_ERROR,
   PRODUCT_BY_ID_SUCCESS,
-  SORT_BY_ALPHABET,
-  SORT_BY_PRICE,
 } from "../types";
 
 const INITIAL_STATE = {
@@ -48,25 +45,15 @@ export const productReducer = (state = INITIAL_STATE, action) => {
     case API_PRODUCT_FILL:
       return {
         ...state,
-        productList: action.payload,
+        productList: [...action.payload],
         // loading : false
       };
-    case SORT_BY_ALPHABET:
-      //sort alphabetically
-      return state;
-    case SORT_BY_PRICE:
-      //sort by price
-      return state;
     case FILTER_BY_PRICE:
-      //filter by price
       return {
         ...state,
         productList: action.payload,
         loading: false,
       };
-    case LOAD_DATA:
-      //load data
-      return state;
     case NULLIFY_ERROR:
       return {
         ...state,

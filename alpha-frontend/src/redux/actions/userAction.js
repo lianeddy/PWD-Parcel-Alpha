@@ -6,7 +6,7 @@ import {
   // API_CHECK_USER,
   LOGIN,
 } from "../types";
-import { api,api_url } from "../../helpers";
+import { api_url } from "../../helpers";
 import Axios from "axios";
 import Swal from "sweetalert2";
 
@@ -218,7 +218,6 @@ export const changePassAction = (data) => {
         headers
       );
       Swal.fire({
-        // position: 'top-end',
         icon: "success",
         title: "Change password succes",
         showConfirmButton: false,

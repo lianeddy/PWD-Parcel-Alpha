@@ -3,6 +3,7 @@ import { Button, Input } from "reactstrap";
 import style from "./page.module.css";
 import { connect } from "react-redux";
 import { changePassAction } from "../redux/actions";
+import Swal from "sweetalert2"
 
 class ChangePassPage extends Component {
   state = {
@@ -46,9 +47,13 @@ class ChangePassPage extends Component {
         <Button
           style={{ backgroundColor: "#ff8ba7", border: "none" }}
           onClick={
-            password === confirmPassword
+            password === confirmPassword 
               ? this.onClickChangePass
-              : () => alert("Password should be same")
+              : () => Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
           }
         >
           Confirm !

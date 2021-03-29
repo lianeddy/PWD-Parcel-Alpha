@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Spinner, Button } from "reactstrap";
-import { CardProduct } from "../components";
-import { fetchProductsAction, filterByPrice } from "../redux/actions";
+import {
+  Input,
+  Spinner,
+  Button,
+  InputGroup,
+  InputGroupAddon,
+} from "reactstrap";
+import {  CardProduct  } from "../components";
+import {
+  fetchProductsAction,
+  filterByPrice,
+  filterByName,
+} from "../redux/actions";
 import jumbotron from "../assets/Jumbotron.jpg";
 import style from "./page.module.css";
+import { FcSearch } from "react-icons/fc";
 
 class HomePage extends Component {
   state = {
@@ -13,7 +24,7 @@ class HomePage extends Component {
     isAvailable: false,
     isOpenAdd: false,
     isOpenEdit: false,
-    searchTerm: "",
+    productName: "",
     priceMax: 0,
     priceMin: 0,
   };
@@ -22,62 +33,69 @@ class HomePage extends Component {
     fetchProductsAction();
   }
 
-  onChangeInput = (e) => {
+  // FILTER //
+  onChangeSearch = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
-
   onChangeMin = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
-
   onChangeMax = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
-
+  onClickSearch = () => {
+    const { filterByName } = this.props;
+    const { productName } = this.state;
+    filterByName({ productName });
+  };
   oncClickFilter = () => {
     const { filterByPrice } = this.props;
     const { priceMax, priceMin } = this.state;
     filterByPrice({ priceMax, priceMin });
   };
+  // FILTER //
+
+  // MODAL//
+  toggle = (id) => {
+    this.setState({ isOpen: !this.state.isOpen, idProduct: id });
+  };
+  // MODAL//
 
   renderCardProduct = () => {
-    const { productList } = this.props;
-    return productList
-      .filter((x) => {
-        if (this.state.searchTerm === "") {
-          return x;
-        } else if (
-          x.productName
-            .toLowerCase()
-            .includes(this.state.searchTerm.toLocaleLowerCase())
-        ) {
-          return x;
-        }
-        return (x = "");
-      })
-      .map((val) => {
-        return (
-          <div style={{ margin: 5 }} key={val.id}>
-            <CardProduct
-              nama={val.productName}
-              caption={val.descripton}
-              harga={val.price}
-              stock={val.stock}
-              index={val.id_product}
-              imagepath={val.imagepath}
-            />
-          </div>
-        );
-      });
+    const { productList, roleID } = this.props;
+    return productList.map((val, i) => {
+      return (
+        <div style={{ margin: 5 }} key={val.id}>
+          <CardProduct
+            nama={val.productName}
+            caption={val.descripton}
+            harga={val.price}
+            stock={val.stock}
+            index={val.id_product}
+            imagepath={val.imagepath}
+            roleID={roleID}
+            id_product={val.id_product}
+            cariIndex={()=>this.cariIndex(i)}
+          />
+        </div>
+      );
+    });
+  };
+
+  cariIndex = (index) => {
+    this.setState({
+      nasi : index 
+    })
   };
 
   render() {
+    
     const { loading } = this.props;
     return (
       <div>
@@ -119,16 +137,24 @@ class HomePage extends Component {
         </div>
         <div className={style.featureProduct}>
           <h1>Find Our Product</h1>
-          <Input
-            id="searchTerm"
-            placeholder="Search..."
-            type="text"
-            onChange={this.onChangeInput}
-            className={style.Input}
-          />
+          <InputGroup>
+            <InputGroupAddon addonType="prepend" className={style.inputGroup}>
+              <Button
+                onClick={this.onClickSearch}
+                style={{ backgroundColor: "#ff8ba7", border: "none" }}
+              >
+                <FcSearch />
+              </Button>
+            </InputGroupAddon>
+            <Input
+              id="productName"
+              placeholder="Search..."
+              type="text"
+              onChange={this.onChangeSearch}
+            />
+          </InputGroup>
           <h4>Filter by Price</h4>
           <div className={style.Input}>
-            {/* <h1>Filter by Price</h1> */}
             <Input
               id="priceMax"
               placeholder="Price-max"
@@ -152,7 +178,7 @@ class HomePage extends Component {
           </div>
         </div>
         {loading ? (
-          <div className="d-flex justif-content-center align-items-center flex-column">
+          <div className="d-flex justif-content-center flex-column">
             <Spinner />
           </div>
         ) : (
@@ -167,11 +193,11 @@ class HomePage extends Component {
             {this.renderCardProduct()}
           </div>
         )}
+        <Button />
       </div>
     );
   }
 }
-// animate__fadeInUp
 
 const mapStatetoProps = ({ product, user }) => {
   return {
@@ -179,9 +205,12 @@ const mapStatetoProps = ({ product, user }) => {
     productList: product.productList,
     error: product.error,
     verified: user.verified,
+    roleID: user.roleID,
   };
 };
 
-export default connect(mapStatetoProps, { fetchProductsAction, filterByPrice })(
-  HomePage
-);
+export default connect(mapStatetoProps, {
+  fetchProductsAction,
+  filterByPrice,
+  filterByName,
+})(HomePage);

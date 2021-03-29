@@ -9,6 +9,7 @@ import VerificationPage from "./VerificationPage";
 import ForgetPage from "./ForgetPage";
 import ParcelPage from "./ParcelPage";
 import ParcelOptions from "./ParcelOptions";
+import AdminProduct from "./AdminProduct";
 
 export {
   HomePage,
@@ -21,4 +22,5 @@ export {
   ForgetPage,
   ParcelPage,
   ParcelOptions,
+  AdminProduct,
 };

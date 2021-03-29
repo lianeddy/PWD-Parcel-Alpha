@@ -8,7 +8,7 @@ const uploader = (destination, fileNamePrefix) => {
     destination: (req, file, cb) => {
       const dir = defaultPath + destination;
       if (fs.existsSync(dir)) {
-        console.log(dir, "directory exists");
+        // console.log(dir, "directory exists");
         cb(null, dir);
       } else {
         fs.mkdir(dir, { recursive: true }, (err) => cb(err, dir));

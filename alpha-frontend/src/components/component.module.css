@@ -35,3 +35,8 @@
 .cardWrapper:hover {
   color: #ff8ba7;
 }
+.btnModal {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}

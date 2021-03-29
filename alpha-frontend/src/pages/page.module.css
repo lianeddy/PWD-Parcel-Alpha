@@ -49,6 +49,14 @@
   align-items: center;
   color: #594a4e;
 }
+.inputGroup {
+  margin-bottom: 5;
+  height: 30;
+  width: 9;
+  border: 9;
+  margin-left: 9;
+  padding-left: 9;
+}
 .Input {
   margin: 8px;
   padding: 9px;

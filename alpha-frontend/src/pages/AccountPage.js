@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Badge, Button } from "reactstrap";
 import style from "./page.module.css";
 
@@ -7,7 +8,7 @@ class AccountPage extends Component {
   state = {};
 
   render() {
-    const { username, email, password, address } = this.props;
+    const { username, email,  address, roleID } = this.props;
 
     return (
       <div className={style.Appcontainer}>
@@ -21,16 +22,24 @@ class AccountPage extends Component {
             Email :<Badge color="dark">{email}</Badge>
           </h2>
           <h2>
-            Password :<Badge color="dark">{password}</Badge>
-          </h2>
-          <h2>
             Address :<Badge color="dark">{address}</Badge>
           </h2>
         </div>
         <div>
-          <a href="/forget-password">
-            <Button>Change My Password Account ?</Button>
-          </a>
+          {roleID === 2 ? (
+            <a href="/forget-password">
+              <Button>Change My Password Account ?</Button>
+            </a>
+          ) : (
+            <div>
+              <a href="/forget-password">
+                <Button>Change My Password Account ?</Button>
+              </a>
+              <Link to="/admin-product">
+                <Button> ALL PRODUCT</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -42,6 +51,7 @@ const mapStatetoProps = ({ user }) => {
     username: user.username,
     email: user.email,
     address: user.address,
+    roleID: user.roleID,
   };
 };
 
